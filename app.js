@@ -3,23 +3,12 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
+
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use('/add-product', (req, res, next) => {
-  console.log('In middleware');
-  res.send('<form action="/product" method="POST"><input type="text" name="title"><button type="submit">Add Product</button></form>');
-});
+app.use(adminRoutes);
+app.use(shopRoutes);
 
-app.post('/product', (req, res, next) => {
-  console.log(req.body);
-  res.redirect('/');
-});
-
-app.use('/', (req, res, next) => {
-  res.send('<h1>Hello</h1>'); // utility function to send response, body with any Type. default content=type is text/html
-});
-
-// const server = http.createServer(app);
-// server.listen(3000);
-// Above can be replaced with:
 app.listen(3000);

@@ -7,7 +7,8 @@ const adminData = require('./admin');
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-  res.render('shop'); // uses the default templating engine and returns that template
+  const products = adminData.products;
+  res.render('shop', { prods: products, docTitle: 'Shop' });
 });
 
 module.exports = router;
